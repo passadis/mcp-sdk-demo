@@ -56,3 +56,13 @@ This implementation uses the official MCP SDK to create proper MCP servers and c
 - Improved error handling and logging
 - Enhanced scalability and interoperability
 - Ecosystem compatibility with MCP-aware applications
+
+┌─────────────────────┐    MCP Protocol    ┌─────────────────────┐
+│  Document Client    │◄──────────────────►│ Document Server     │
+│                     │                    │ (Verification)      │
+└─────────────────────┘                    └─────────────────────┘
+
+┌─────────────────────┐    MCP Protocol    ┌─────────────────────┐
+│Summarization Client │◄──────────────────►│Summarization Server │
+│                     │                    │  (AI Services)      │
+└─────────────────────┘                    └─────────────────────┘
