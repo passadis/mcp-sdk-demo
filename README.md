@@ -6,9 +6,6 @@
 
 <h1 align="center">The best way to Learn MCP: Unlock the AI future</h1>
 
-
-
-
 # MCP SDK Implementation
 
 This directory contains a Demo wit Web UI using the actual Model Context Protocol (MCP) SDK.
