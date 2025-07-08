@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCP Document Exchange - AI Document Verification & Summarization</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="floating-elements">
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+    </div>
+
+    <div class="main-container">
+        <!-- Header Section -->
+        <div class="header-card">
+            <h1>
+                <i class="fas fa-shield-alt logo-icon"></i>
+                MCP Document Exchange
+            </h1>
+            <p><span class="status-indicator status-online"></span>AI Document Verification & Summarization</p>
+            <p style="margin-top: 10px;">Secure document processing using Model Context Protocol (MCP) services.</p>
+        </div>
+        
+        <!-- Action Selection -->
+        <div class="action-selector">
+            <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
+                <label class="btn btn-outline-primary active">
+                    <input type="radio" name="action" id="process_document" value="process" checked>
+                    <i class="fas fa-cogs"></i> Verify & Summarize
+                </label>
+                <label class="btn btn-outline-primary">
+                    <input type="radio" name="action" id="verify_only" value="verify">
+                    <i class="fas fa-shield-check"></i> Verify Only
+                </label>
+                <label class="btn btn-outline-primary">
+                    <input type="radio" name="action" id="summarize_only" value="summarize">
+                    <i class="fas fa-file-signature"></i> Summarize Only
+                </label>
+            </div>
+        </div>
+        
+        <!-- Input Form -->
+        <div class="form-card">
+            <form id="documentForm">
+                <div class="form-group">
+                    <label for="document_content">
+                        <i class="fas fa-file-text"></i>
+                        Document Content:
+                    </label>
+                    <textarea 
+                        class="form-control" 
+                        id="document_content" 
+                        name="document_content" 
+                        rows="8" 
+                        required 
+                        placeholder="Paste your document content here..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="access_code">
+                        <i class="fas fa-key"></i>
+                        Access Code:
+                    </label>
+                    <input 
+                        type="text" 
+                        class="form-control" 
+                        id="access_code" 
+                        name="access_code" 
+                        required 
+                        placeholder="e.g., DOC001, VERIFY123, SUMMARY456">
+                    <small class="form-text text-muted">
+                        Enter the access code required for document processing.
+                    </small>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-block btn-lg" id="submitButton">
+                    <i class="fas fa-paper-plane"></i>
+                    <span id="buttonText">Process Document</span>
+                </button>
+            </form>
+        </div>
+
+        <!-- Loading Indicator -->
+        <div class="loading-container" id="loadingContainer">
+            <div class="spinner"></div>
+            <div class="loading-text">
+                <span id="loadingText">Processing your document</span><span class="loading-dots"></span>
+            </div>
+        </div>
+
+        <!-- Response Area (Chat-style) -->
+        <div class="response-card">
+            <div class="response-header">
+                <h4><i class="fas fa-comments"></i> System Activity</h4>
+                <button class="btn btn-sm btn-outline-secondary" id="clearLogsBtn">
+                    <i class="fas fa-trash"></i> Clear Logs
+                </button>
+            </div>
+            <div id="responseArea" class="response-area">
+                <div class="initial-message">
+                    <i class="fas fa-info-circle"></i>
+                    System ready. Enter document content and access code to begin processing.
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <button class="btn btn-info btn-sm" id="sampleDocBtn">
+                <i class="fas fa-file-alt"></i> Load Sample Document
+            </button>
+            <button class="btn btn-secondary btn-sm" id="healthCheckBtn">
+                <i class="fas fa-heartbeat"></i> System Health
+            </button>
+        </div>
+    </div>
+
+    <!-- Status Indicators -->
+    <div class="status-bar">
+        <div class="status-item">
+            <span class="status-dot" id="documentServiceStatus"></span>
+            <span>Document Service</span>
+        </div>
+        <div class="status-item">
+            <span class="status-dot" id="summarizationServiceStatus"></span>
+            <span>Summarization Service</span>
+        </div>
+        <div class="status-item">
+            <span class="status-dot" id="connectionStatus"></span>
+            <span>MCP Connection</span>
+        </div>
+    </div>
+
+    <!-- Modal for Results -->
+    <div class="modal fade" id="resultModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-check-circle text-success"></i>
+                        Processing Complete
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="modalBody">
+                    <!-- Results will be populated here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="copyResultBtn">
+                        <i class="fas fa-copy"></i> Copy Results
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

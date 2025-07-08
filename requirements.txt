@@ -1,0 +1,20 @@
+# MCP SDK Implementation Requirements
+
+# Core MCP dependencies (specific version for compatibility)
+mcp>=0.9.0
+
+# Cryptography for secure communication
+cryptography>=41.0.0
+
+# Azure OpenAI for summarization services
+openai>=1.0.0
+
+# Additional utilities
+python-dotenv>=1.0.0
+
+# Async support
+anyio>=3.0.0
+
+# Development dependencies (optional)
+pytest>=7.0.0
+pytest-asyncio>=0.21.0
