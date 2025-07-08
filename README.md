@@ -1,10 +1,10 @@
 # MCP SDK Implementation
 
-This directory contains the ported version of the A2A showcase using the actual Model Context Protocol (MCP) SDK.
+This directory contains a Demo wit Web UI using the actual Model Context Protocol (MCP) SDK.
 
 ## Architecture Overview
 
-The original implementation used a mock MCP server with Flask-based agents. This implementation uses the official MCP SDK to create proper MCP servers and clients.
+This implementation uses the official MCP SDK to create proper MCP servers and clients.
 
 ### Original Implementation (in parent directories)
 - **mcp_server_project**: Mock MCP server for agent registration and message relay
@@ -34,6 +34,8 @@ The original implementation used a mock MCP server with Flask-based agents. This
 5. **Discoverability**: MCP schema for automatic tool discovery
 
 ## Setup Instructions
+
+** Follow the Quickstart Instructions to get started!
 
 1. Install MCP SDK: `pip install mcp`
 2. Configure Azure OpenAI credentials in environment variables
