@@ -54,3 +54,13 @@ The original implementation used a mock MCP server with Flask-based agents. This
 - Improved error handling and logging
 - Enhanced scalability and interoperability
 - Ecosystem compatibility with MCP-aware applications
+
+┌─────────────────────┐    MCP Protocol    ┌─────────────────────┐
+│  Document Client    │◄──────────────────►│ Document Server     │
+│                     │                    │ (Verification)      │
+└─────────────────────┘                    └─────────────────────┘
+
+┌─────────────────────┐    MCP Protocol    ┌─────────────────────┐
+│Summarization Client │◄──────────────────►│Summarization Server │
+│                     │                    │  (AI Services)      │
+└─────────────────────┘                    └─────────────────────┘
